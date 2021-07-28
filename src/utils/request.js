@@ -1,6 +1,12 @@
+/*
+ * @Descripttion: 
+ * @Author: wmq
+ * @Date: 2021-07-18 17:17:09
+ * @LastEditTime: 2021-07-19 11:12:10
+ */
 import axios from "axios";
 import { Message, Msgbox } from "element3";
-import store from "/@/store";
+import store from "@/store";
 
 // 创建axios实例
 const service = axios.create({
@@ -16,7 +22,7 @@ service.interceptors.request.use(
   (config) => {
     // 指定请求令牌
     // if (store.getters.token) {
-    // // 自定义令牌的字段名为X-Token，根据咱们后台再做修改
+    // // 自定义令牌的字段名为X-Token，根据后台再做修改
     // config.headers["X-Token"] = store.getters.token;
     // }
     config.headers["X-Token"] = "my token";
@@ -44,7 +50,7 @@ service.interceptors.response.use(
     const res = response.data;
 
     // 如果状态码不是20000则认为有错误
-    if (res.code !== 20000) {
+    if (res.code !== 0) {
       Message.error({
         message: res.message || "Error",
         duration: 5 * 1000,
@@ -68,7 +74,7 @@ service.interceptors.response.use(
       return res;
     }
   },
-  (error) => {
+  (error) => { // 403、401等服务端错误码处理
     console.log("err" + error); // for debug
     Message({
       message: error.message,

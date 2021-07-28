@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: wmq
  * @Date: 2021-06-21 22:49:33
- * @LastEditTime: 2021-07-15 00:00:59
+ * @LastEditTime: 2021-07-19 11:12:46
 -->
 <template>
   <h1>{{ msg }}</h1>
@@ -27,16 +27,25 @@
 <script setup>
 import { defineProps, reactive } from 'vue'
 import Comp from 'comps/Comp.vue';
+import request from 'utils/request';
 
 defineProps({
   msg: String
 })
 
 const state = reactive({ count: 0 })
-// 请求测试
+// mock请求测试
 fetch('/api/getUsers').then(res=>res.json()).then(data=>{
   console.log('data :>> ', data);
 })
+// axios 封装请求测试
+try {
+  const users = await request('/getUsers');
+  console.log('users :>> ', users);
+} catch (error) {
+  console.log('error :>> ', error);
+}
+
 </script>
 
 <style scoped>

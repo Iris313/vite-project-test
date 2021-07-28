@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: wmq
  * @Date: 2021-07-14 23:09:32
- * @LastEditTime: 2021-07-18 19:20:50
+ * @LastEditTime: 2021-07-19 11:17:03
  */
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Layout from '@/layouts/index.vue';
@@ -25,13 +25,14 @@ export const routes = [
     { 
         path: '/user', 
         name: "User",
+        redirect: "/user/list",
         component: Layout, 
         meta: { title: "用户管理", icon: "el-icon-s-home" },
         children: [
             { 
-                path: '/a', 
+                path: '/list', 
                 component: () => import('views/test.vue') ,
-                meta: { title: "页面A", icon: "el-icon-s-home" },
+                meta: { title: "用户列表", icon: "el-icon-s-home" },
             }
         ]
     },
